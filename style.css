@@ -67,6 +67,7 @@ body {
 }
 
 .story {
+    max-width: 1300px;
     width: fit-content;
     margin-bottom: 25px;
     background-color: #fff;
@@ -96,6 +97,10 @@ body {
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
+}
+
+.story .storyText {
+    max-width: 800px;
 }
 
 button#show-more {
