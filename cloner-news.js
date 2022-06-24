@@ -27,7 +27,6 @@ document.getElementById('a').style.backgroundSize = "cover";
 
 
 function fetchTS() {
-
     clearInterval(timer);
     document.querySelector(".container").style.display = "none";
 
@@ -40,9 +39,7 @@ function fetchTS() {
 
 
 function fetchStories(array) {
-
     let topStoriesID = array.slice(start, x + start);
-
     let topStories = topStoriesID.map(id => {
         return fetch(`${hackernewsURL}/item/${id}.json`)
             .then(response => response.json())
@@ -56,12 +53,10 @@ function fetchStories(array) {
 }
 
 function printStories(topStories) {
-
     return topStories.map(story => {
-
         let userURL = `https://news.ycombinator.com/user?id=${story.by}`
-
         let comment;
+
         story.descendants == 1 ? comment = "comment" : comment = "comments"
 
         let HTMLtoInsert = `
@@ -91,13 +86,16 @@ ${story.text ?
 function toggleStory(storyID) {
     let storyText = document.getElementsById(`storyText-${storyID}`);
 
-    if (storyText.style.display == "block") { storyText.style.display = "none" }
-    else { storyText.style.display = "block" }
+    // if it's visible, hide it
+    if (storyText.style.display == "block") {
+        storyText.style.display = "none"
+    } else {
+        storyText.style.display = "block"
+    }
 }
 
 
 function toggleButton(str) {
-
     selectPage = str;
     start = 0;
     x = 10;
@@ -110,6 +108,5 @@ function toggleButton(str) {
     [...allButtons].forEach(button => button.className = "page-title unselected");
     clickedButton.className = "page-title";
 }
-
 
 fetchTS();
