@@ -1,0 +1,99 @@
+<!-- TO BE DONE: 
+- FETCH LATEST ID
+- CHECK FOR UPDATE
+- ORGANISE/ADD HTML
+- CSS
+- TOGGLE AND FETCH COMMENTS
+- PRINT COMMENTS
+- DON'T KNOW WHY THE BUTTONS ARE NOT WORKING (CHECK THE TOGGLE BUTTON FUNCTION FOR THEM (CLASS NAME= "PAGE-TITLE, THAT'S HOW IT'S LINKED TO HTML"))
+- NAVBAR'S AHREF LINK IS SET TO NOTHING ATM -->
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Clonernews</title>
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico|Roboto&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body id="a" class="im">
+
+    <nav class="navbar navbar-expand-lg navbar navbar-dark fixed-top"
+        style="background: linear-gradient(#242636, #074a50)">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/" title="Homepage">Cloner News</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="top stories">Top Stories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="news">News</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="best stories">Best Stories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="ask">Ask</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="show">Show</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="jobs">Jobs</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="main">
+
+        <div class="pages-titles" style="text-align:left">
+            <div class="button">
+                <button id="topstories" type="button" class="page-title" onclick="toggleButton('topstories');">Top
+                    Stories</button>
+
+                <button id="newstories" class="page-title unselected" onclick="toggleButton('newstories');"
+                    type="button">News</button>
+
+                <button id="beststories" class="page-title unselected" onclick="toggleButton('beststories');"
+                    type="button">Best Stories</button>
+
+                <button id="askstories" class="page-title unselected" onclick="toggleButton('askstories');"
+                    type="button">Ask</button>
+
+                <button id="showstories" class="page-title unselected" onclick="toggleButton('showstories');"
+                    type="button">Show</button>
+
+                <button id="jobstories" class="page-title unselected" onclick="toggleButton('jobstories');"
+                    type="button">Jobs</button>
+            </div>
+        </div>
+
+        <div id="result"></div>
+
+    </div>
+
+    <div class="container">
+        <div class="email" onmouseover="this.classList.add('expand')" onmouseout="this.classList.remove('expand')">
+
+        </div>
+    </div>
+
+    <script src="cloner-news.js" type="module"></script>
+</body>
+
+</html>
