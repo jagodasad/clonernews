@@ -14,7 +14,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Clonernews</title>
+    <title>Cloner News</title>
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
 
@@ -60,40 +60,34 @@
         </div>
     </nav>
     <div class="main">
-
         <div class="pages-titles" style="text-align:left">
-            <div class="button">
-                <button id="topstories" type="button" class="page-title" onclick="toggleButton('topstories');">Top
+            <div class="buttons">
+                <button id="btn topstories" type="button" class="page-title" onclick="toggleButton('topstories');">Top
                     Stories</button>
-
-                <button id="newstories" class="page-title unselected" onclick="toggleButton('newstories');"
+                <button id="btn newstories" class="page-title unselected" onclick="toggleButton('newstories');"
                     type="button">News</button>
-
-                <button id="beststories" class="page-title unselected" onclick="toggleButton('beststories');"
-                    type="button">Best Stories</button>
-
+                <button id="btn beststories" class="page-title unselected" onclick="toggleButton('beststories');"
+                    type="btn button">Best Stories</button>
                 <button id="askstories" class="page-title unselected" onclick="toggleButton('askstories');"
-                    type="button">Ask</button>
-
+                    type="btn button">Ask</button>
                 <button id="showstories" class="page-title unselected" onclick="toggleButton('showstories');"
-                    type="button">Show</button>
-
+                    type="btn button">Show</button>
                 <button id="jobstories" class="page-title unselected" onclick="toggleButton('jobstories');"
-                    type="button">Jobs</button>
+                    type="btn button">Jobs</button>
             </div>
         </div>
-
         <div id="result"></div>
-
     </div>
 
     <div class="container">
         <div class="email" onmouseover="this.classList.add('expand')" onmouseout="this.classList.remove('expand')">
-
         </div>
     </div>
 
     <script src="cloner-news.js" type="module"></script>
+
+    <button id="show-more" type="button" class="page-title" onclick="toggleButton('show-more');">
+        Show More</button>
 </body>
 
 </html>
