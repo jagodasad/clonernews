@@ -108,6 +108,7 @@ function toggleButton(str) {
 }
 
 fetchTS();
+
 async function fetchComments(kids, storyID) {
     let commentIDs = kids.split(",");;
     let allComments = commentIDs.map(async (commentID) => {
