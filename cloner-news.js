@@ -25,31 +25,29 @@ document.getElementById('a').style.backgroundImage = "url(../static/news.png)";
 document.getElementById('a').style.backgroundRepeat = "no-repeat";
 document.getElementById('a').style.backgroundSize = "cover";
 
-
-function fetchTS() {
+//async function was best suggested here
+async function fetchTS() {
     clearInterval(timer);
     document.querySelector(".container").style.display = "none";
 
     if (selectPage == "newstories") { fetchLatestID(); }
 
-    return fetch(`${hackernewsURL}/${selectPage}.json`)
-        .then(response => response.json())
-        .then(topStoriesID_array => fetchStories(topStoriesID_array));
+    const response = await fetch(`${hackernewsURL}/${selectPage}.json`);
+    const topStoriesID_array = await response.json();
+    return await fetchStories(topStoriesID_array);
 }
 
-
-function fetchStories(array) {
+//async function was best suggested here
+async function fetchStories(array) {
     let topStoriesID = array.slice(start, x + start);
     let topStories = topStoriesID.map(id => {
         return fetch(`${hackernewsURL}/item/${id}.json`)
             .then(response => response.json())
     });
 
-    return Promise.all(topStories)
-        .then(topStories => {
-            state.stories = topStories
-            printStories(topStories)
-        });
+    const topStories_1 = await Promise.all(topStories);
+    state.stories = topStories_1;
+    printStories(topStories_1);
 }
 
 function printStories(topStories) {
@@ -110,3 +108,81 @@ function toggleButton(str) {
 }
 
 fetchTS();
+async function fetchComments(kids, storyID) {
+    let commentIDs = kids.split(",");;
+    let allComments = commentIDs.map(async (commentID) => {
+        const response = await fetch(`${hackernewsURL}/item/${commentID}.json`);
+        return await response.json();
+    })
+    const comments = await Promise.all(allComments);
+    state[storyID] = comments;
+    printComment(comments, storyID);
+};
+function fetchOrToggleComments(kids, storyID) {
+    function toggleAllComments(storyID) {
+        let allComments = document.getElementById(`comments-${storyID}`)
+        if(allComments.style.display == "block") { allComments.style.display = "none"}
+        else {allComments.style.display = "block"}
+    }
+    state[storyID] ? toggleAllComments(storyID) : fetchComments(kids, storyID)
+};
+function toggleComment(commentID) {
+    let comment = document.getElementById(commentID);
+    let toggle = document.getElementById(`toggle-${commentID}`)
+
+    if (comment.style.display == "block") {comment.style.display = "none"}
+    else { comment.style.display = "block"}
+
+    if(toggle.innerHTML == '[ - ]') { toggle.innerHTML = '[ + ]' }
+    else { toggle.innerHTML = '[ - ]' }
+};
+// to print all comments in the DOM
+function printComments(comments, storyID)
+{
+    // For each comment in the array comment:
+    return comments.map(comment => {
+
+        let userURL = `https://news.ycombinator.com/user?id=${comment.by}`;
+        let HTMLtoInsert = '';
+
+        if(comment.deleted != true && comment.dead != true)
+        {
+            HTMLtoInsert =
+            `
+            <div class="comment">
+                <span onclick="toggleComment(${comment.id})" href="javascript:void(0)" id="toggle-${comment.id}" class="toggle-comment" >[ – ]</span>
+                <a href=${userURL} class="comment-by"> ${comment.by} </a>
+                <div id=${comment.id} class="comment-text" style="display:block"> ${comment.text} </div>
+            </div>
+            `
+        }
+        if(comment.parent == storyID){
+            document.getElementById(`comments-${storyID}`).insertAdjacentHTML("beforeend", HTMLtoInsert);
+        }
+        else {
+            document.getElementById(comment.parent).insertAdjacentHTML("beforeend", HTMLtoInsert)
+        }
+
+        if(comment.kids) { return fetchComments(comment.kids.toString(), storyID) };
+    });
+}
+async function fetchLatestID() {
+
+    latestID = await fetch(`${hackernewsURL}/${pageSelection}.json`)
+    .then(response => response.json())
+    .then(newStoriesID_array => newStoriesID_array[0]);
+
+    timer = setInterval(checkForUpdate, 5000);
+}
+
+async function checkForUpdate() {
+
+    let latestID_updated = await fetch(`${hackernewsURL}/${pageSelection}.json`)
+        .then(response => response.json())
+        .then(newStoriesID_array => newStoriesID_array[0]);
+
+    if(latestID_updated != latestID)
+    {
+        document.querySelector(".container").style.display = '';
+    }
+};
