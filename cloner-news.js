@@ -107,6 +107,10 @@ function toggleButton(str) {
     clickedButton.className = "page-title";
 }
 
+// function repeatVar(str) {
+//     console.log(str)
+// }
+
 async function fetchComments(kids, storyID) {
     let commentIDs = kids.split(",");
     let allComments = commentIDs.map(async (commentID) => {
