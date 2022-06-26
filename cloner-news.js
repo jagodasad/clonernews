@@ -40,9 +40,9 @@ async function fetchTS() {
 //async function was best suggested here
 async function fetchStories(array) {
     let topStoriesID = array.slice(start, x + start);
-    let topStories = topStoriesID.map(id => {
-        return fetch(`${hackernewsURL}/item/${id}.json`)
-            .then(response => response.json())
+    let topStories = topStoriesID.map(async id => {
+        const response = await fetch(`${hackernewsURL}/item/${id}.json`);
+        return await response.json();
     });
 
     const topStories_1 = await Promise.all(topStories);
@@ -106,7 +106,14 @@ function toggleButton(str) {
     [...allButtons].forEach(button => button.className = "page-title unselected");
     clickedButton.className = "page-title";
 }
-
+// print more stories when the end of the page is reached
+window.onscroll = function() {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && storiesPrint === false) {
+        storiesPrint = true;
+        start += x
+        fetchTS()
+    }
+}
 fetchTS();
 
 async function fetchComments(kids, storyID) {
