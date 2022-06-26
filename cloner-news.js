@@ -50,8 +50,8 @@ async function fetchStories(array) {
     printStories(topStories_1);
 }
 
-function printStories(topStories) {
-    return topStories.map(story => {
+function printStories(topStories_1) {
+    return topStories_1.map(story => {
         let userURL = `https://news.ycombinator.com/user?id=${story.by}`
         let comment;
 
@@ -106,25 +106,16 @@ function toggleButton(str) {
     [...allButtons].forEach(button => button.className = "page-title unselected");
     clickedButton.className = "page-title";
 }
-// print more stories when the end of the page is reached
-window.onscroll = function() {
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && storiesPrint === false) {
-        storiesPrint = true;
-        start += x
-        fetchTS()
-    }
-}
-fetchTS();
 
 async function fetchComments(kids, storyID) {
-    let commentIDs = kids.split(",");;
+    let commentIDs = kids.split(",");
     let allComments = commentIDs.map(async (commentID) => {
         const response = await fetch(`${hackernewsURL}/item/${commentID}.json`);
         return await response.json();
     })
     const comments = await Promise.all(allComments);
     state[storyID] = comments;
-    printComment(comments, storyID);
+    printComments(comments, storyID);
 };
 function fetchOrToggleComments(kids, storyID) {
     function toggleAllComments(storyID) {
@@ -136,13 +127,13 @@ function fetchOrToggleComments(kids, storyID) {
 };
 function toggleComment(commentID) {
     let comment = document.getElementById(commentID);
-    let toggle = document.getElementById(`toggle-${commentID}`)
+    let toggle = document.getElementById(`toggle-${commentID}`);
 
-    if (comment.style.display == "block") {comment.style.display = "none"}
-    else { comment.style.display = "block"}
-
-    if(toggle.innerHTML == '[ - ]') { toggle.innerHTML = '[ + ]' }
-    else { toggle.innerHTML = '[ - ]' }
+    if(comment.style.display == "block") { comment.style.display = "none" }
+    else { comment.style.display = "block" }
+    
+    if(toggle.innerHTML == '[ – ]') { toggle.innerHTML = '[ + ]' }
+    else { toggle.innerHTML = '[ – ]' }
 };
 // to print all comments in the DOM
 function printComments(comments, storyID)
@@ -174,6 +165,16 @@ function printComments(comments, storyID)
         if(comment.kids) { return fetchComments(comment.kids.toString(), storyID) };
     });
 }
+// print more stories when the end of the page is reached
+window.onscroll = function() {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && storiesPrint === false) {
+        storiesPrint = true;
+        start += x
+        fetchTS()
+    }
+}
+fetchTS();
+
 async function fetchLatestID() {
 
     latestID = await fetch(`${hackernewsURL}/${pageSelection}.json`)
