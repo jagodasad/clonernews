@@ -75,7 +75,7 @@ function printStories(topStories_1) {
                 `<a href='${story.url}' target='_blank'> ${story.title} </a>`
                 : `<a href="javascript:void(0)" onclick="toggleStory('${story.id}')"> ${story.title} </a>`}
 </h3>
-<span class='score'> ${story.score} </span> points by <a href='${userURL}' target='_blank' class='story-by'> ${story.by}</a> <span class='time'> ${story.time} </span> type: <span class='type'> ${story.type} </span>
+<span class='score'> ${story.score} </span> points by <a href='${userURL}' target='_blank' class='story-by'> ${story.by}</a>, Time: <span class='time'> ${story.time} </span>, Type: <span class='type'> ${story.type} </span>
 <div class="toggle-view">
 ${story.kids ?
                 `<span onclick="fetchOrToggleComments('${story.kids}', '${story.id}')" class="comments"> ❯ show ${story.descendants} ${comment} </span>`
