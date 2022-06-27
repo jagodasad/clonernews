@@ -51,17 +51,17 @@ async function fetchStories(array) {
 }
 
 
-function format_time(s) {
-    const dtFormat = new Intl.DateTimeFormat('en-GB', {
-      timeStyle: 'medium',
-      timeZone: 'UTC'
-    });
+// function format_time(s) {
+//     const dtFormat = new Intl.DateTimeFormat('en-GB', {
+//       timeStyle: 'medium',
+//       timeZone: 'UTC'
+//     });
     
-    return dtFormat.format(new Date(s * 1e3));
-  }
+//     return dtFormat.format(new Date(s * 1e3));
+//   }
   
-  console.log( format_time(12345) );  // "03:25:45"
-
+//   console.log( format_time(12345) );  
+  
 function printStories(topStories_1) {
     return topStories_1.map(story => {
         let userURL = `https://news.ycombinator.com/user?id=${story.by}`
