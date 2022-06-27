@@ -110,7 +110,6 @@ function toggleButton(str) {
 // function repeatVar(str) {
 //     console.log(str)
 // }
-
 async function fetchComments(kids, storyID) {
     let commentIDs = kids.split(",");
     let allComments = commentIDs.map(async (commentID) => {
