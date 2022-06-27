@@ -9,7 +9,20 @@ body {
     margin-top: 30px;
     margin-bottom: 20px;
 }
-
+.navbarItem{
+    background-color: rgb(221, 216, 216);
+    border-style: solid;
+    border-width: 6px;
+    box-sizing: border-box;
+    color: #41403e;
+    display: inline-block;
+    font-family: Neucha, sans-serif;
+    font-size: 1rem;
+    line-height: 10px;
+    outline: none;
+    padding: .75rem;
+    transition: all 235ms ease-in-out;
+}
 /* CSS */
 .page-title {
     align-self: center;
@@ -105,4 +118,8 @@ body {
 
 button#show-more {
     margin: -20px 0 50px 28px;
+}
+
+.nav-item {
+    color: rgb(180, 67, 67);
 }
