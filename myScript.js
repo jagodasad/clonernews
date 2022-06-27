@@ -50,6 +50,18 @@ async function fetchStories(array) {
     printStories(topStories_1);
 }
 
+
+function format_time(s) {
+    const dtFormat = new Intl.DateTimeFormat('en-GB', {
+      timeStyle: 'medium',
+      timeZone: 'UTC'
+    });
+    
+    return dtFormat.format(new Date(s * 1e3));
+  }
+  
+  console.log( format_time(12345) );  // "03:25:45"
+
 function printStories(topStories_1) {
     return topStories_1.map(story => {
         let userURL = `https://news.ycombinator.com/user?id=${story.by}`
@@ -63,7 +75,7 @@ function printStories(topStories_1) {
                 `<a href='${story.url}' target='_blank'> ${story.title} </a>`
                 : `<a href="javascript:void(0)" onclick="toggleStory('${story.id}')"> ${story.title} </a>`}
 </h3>
-<span class='score'> ${story.score} </span> points by <a href='${userURL}' target='_blank' class='story-by'> ${story.by}</a>
+<span class='score'> ${story.score} </span> points by <a href='${userURL}' target='_blank' class='story-by'> ${story.by}</a> <span class='time'> ${story.time} </span> type: <span class='type'> ${story.type} </span>
 <div class="toggle-view">
 ${story.kids ?
                 `<span onclick="fetchOrToggleComments('${story.kids}', '${story.id}')" class="comments"> ❯ show ${story.descendants} ${comment} </span>`
